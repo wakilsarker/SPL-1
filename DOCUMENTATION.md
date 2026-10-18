@@ -258,7 +258,7 @@ It also stores `file`, `prefix`, `title`, `fields` as `protected` so subclasses 
 |---|---|---|
 | `PatientService` | patients.csv | Uses the `Patient` model + its own CRUD. Also `all()`, `find(id)`, `exists(id)`. |
 | `DoctorService` | doctors.csv | Same pattern as PatientService but for `Doctor`. |
-| `AppointmentService` | appointments.csv | `schedule()`, `view()`, `complete()`, `cancel()`. Needs PatientService + DoctorService to validate IDs. |
+| `AppointmentService` | appointments.csv | `schedule()`, `view()`, `complete()`, `cancel()`. Validates IDs and prevents active doctor/patient time-slot conflicts. |
 | `LaboratoryService` | lab_tests.csv, lab_results.csv | Wraps **two** `TableService` instances (tests `T` and results `L`). |
 | `AccountingService` | expenses.csv, revenues.csv | `addExpense/addRevenue/view*` + `summary()` (revenue − expense) + total sums. |
 | `ReportService` | reads many files | Builds an overview report (totals, beds, money). |
@@ -324,7 +324,7 @@ All files live in `data/`. Relationships are maintained by **ID references**, e.
 
 ### 9.1 Referential checks before saving
 Several services verify an ID exists before creating a dependent record:
-- `AppointmentService.schedule()` — checks patient **and** doctor exist.
+- `AppointmentService.schedule()` — checks patient and doctor exist, then rejects a matching active date/time for either the doctor or patient.
 - `LaboratoryService.addResult()` — checks patient and test exist.
 - `MedicalRecordService.add()` — checks patient and doctor exist.
 - `PrescriptionService` — checks patient, doctor, and each medicine ID.
@@ -417,7 +417,7 @@ This is the closest thing to a "transaction/audit log" in the project.
 Add / View / Search (same as patients) / Update / Delete.
 
 ### 10.3 Appointment Management
-1. Schedule Appointment — validates patient + doctor, stores `Scheduled`.
+1. Schedule Appointment — validates patient + doctor, rejects an active doctor/patient time conflict, then stores `Scheduled`.
 2. View Appointments.
 3. Mark Completed — changes status to `Completed`.
 4. Cancel Appointment — changes status to `Cancelled`.

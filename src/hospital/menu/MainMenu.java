@@ -5,6 +5,8 @@ import hospital.util.Input;
 
 /** Terminal menus. Keeping menus separate from services makes the program easy to explain. */
 public class MainMenu {
+    private final String username;
+    private final String role;
     private final PatientService patients=new PatientService();
     private final DoctorService doctors=new DoctorService();
     private final AppointmentService appointments=new AppointmentService(patients,doctors);
@@ -17,6 +19,9 @@ public class MainMenu {
     private final AccountingService accounting=new AccountingService();
     private final BloodBankService donors=new BloodBankService();
     private final ReportService reports=new ReportService(patients,doctors,appointments,beds,billing,accounting);
+
+    public MainMenu() { this("Local user", "STANDALONE"); }
+    public MainMenu(String username, String role) { this.username=username; this.role=role; }
 
     public void start(){
         while(true){
@@ -40,6 +45,6 @@ public class MainMenu {
     private void billingMenu(){while(true){title("BILLING & PAYMENT");System.out.println("1. Create Bill\n2. View Bills\n3. Search Bills\n4. Receive Payment\n0. Back");switch(Input.number("Choice: ")){case 1:billing.add();break;case 2:billing.view();break;case 3:billing.search();break;case 4:billing.receivePayment();break;case 0:return;default:System.out.println("Invalid option.");}pause();}}
     private void accountingMenu(){while(true){title("ACCOUNTING");System.out.println("1. Add Expense\n2. View Expenses\n3. Add Revenue\n4. View Revenues\n5. Financial Summary\n0. Back");switch(Input.number("Choice: ")){case 1:accounting.addExpense();break;case 2:accounting.viewExpenses();break;case 3:accounting.addRevenue();break;case 4:accounting.viewRevenues();break;case 5:accounting.summary();break;case 0:return;default:System.out.println("Invalid option.");}pause();}}
     private void donorMenu(){while(true){title("BLOOD DONOR MANAGEMENT");System.out.println("1. Add Donor\n2. View Donors\n3. Search Donor\n4. Find Available Donor by Group\n0. Back");switch(Input.number("Choice: ")){case 1:donors.add();break;case 2:donors.view();break;case 3:donors.search();break;case 4:donors.findAvailable();break;case 0:return;default:System.out.println("Invalid option.");}pause();}}
-    private void title(String text){System.out.println("\n========================================\n       "+text+"\n========================================");}
+    private void title(String text){System.out.println("\n========================================\n       "+text+"\n       User: "+username+" ("+role+")\n========================================");}
     private void pause(){Input.pause();}
 }
