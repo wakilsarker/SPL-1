@@ -33,7 +33,8 @@ public class Main {
         try {
             int port = Integer.parseInt(args[index]);
             if (port >= 1 && port <= 65535) return port;
-        } catch (NumberFormatException ignored) { }
+        } catch (NumberFormatException ignored) {
+        }
         System.out.println("Invalid port. Using " + LoginServer.DEFAULT_PORT + ".");
         return LoginServer.DEFAULT_PORT;
     }
