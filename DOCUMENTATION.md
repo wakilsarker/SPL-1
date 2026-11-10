@@ -1,4 +1,4 @@
-# CarePlus — Console Hospital Management System (Full Documentation)
+# CarePlus — Console Hospital Management System 
 
 This document explains the entire codebase so you can understand it easily before a viva or while extending it. It covers what the project does, how it is organised, how each file works, how the data is stored, and how the pieces fit together.
 
