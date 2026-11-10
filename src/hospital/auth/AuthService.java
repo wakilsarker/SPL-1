@@ -12,7 +12,8 @@ public final class AuthService {
     private static final String FILE = "data/users.csv";
 
     public void seedDefaultAccounts() {
-        if (!CsvUtil.read(FILE).isEmpty()) return;
+        if (!CsvUtil.read(FILE).isEmpty()) 
+            return;
         save("admin", "admin123", "ADMIN");
         save("doctor", "doctor123", "DOCTOR");
         save("reception", "reception123", "RECEPTIONIST");
