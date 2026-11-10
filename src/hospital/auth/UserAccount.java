@@ -10,6 +10,11 @@ public final class UserAccount {
         this.role = role;
     }
 
-    public String username() { return username; }
-    public String role() { return role; }
+    public String username() { 
+        return username; 
+    }
+    public String role() {
+        return role; 
+    }
+    
 }
