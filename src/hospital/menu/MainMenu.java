@@ -28,7 +28,7 @@ public class MainMenu {
 
     public void start(){
         while(true){
-            title("HOSPITAL  SYSTEM");
+            title("HOSPITAL MANAGEMENT SYSTEM");
             System.out.println("1. Patients \n2. Doctors \n3. Appointments \n4. Medical Records\n5. Prescriptions\n6. Laboratory\n7. Pharmacy\n8. Bed \n9. Billing & Payment\n10. Accounting\n11. Blood Donor \n12. Reports\n0. Exit");
             switch(Input.number("Enter choice: ")){
                 case 1:patientMenu();break;
