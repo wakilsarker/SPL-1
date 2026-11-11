@@ -47,7 +47,7 @@ public final class AuthService {
             byte[] value = digest.digest((salt + ":" + password).getBytes(StandardCharsets.UTF_8));
             return Base64.getEncoder().encodeToString(value);
         } catch (NoSuchAlgorithmException e) {
-            throw new IllegalStateException("SHA-256 is unavailable", e);
+            throw new IllegalStateException("Login is unavailable", e);
         }
     }
 }

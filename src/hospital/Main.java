@@ -4,7 +4,6 @@ import hospital.menu.MainMenu;
 import hospital.network.LoginClient;
 import hospital.network.LoginServer;
 
-/** Entry point for the Console-Based Hospital Management System. */
 public class Main {
     public static void main(String[] args) {
         if (args.length > 0 && "server".equalsIgnoreCase(args[0])) {
@@ -12,7 +11,7 @@ public class Main {
             return;
         }
         if (args.length > 0 && "standalone".equalsIgnoreCase(args[0])) {
-            new MainMenu("Local user", "STANDALONE").start();
+            new MainMenu("Local user", "").start();
             return;
         }
 

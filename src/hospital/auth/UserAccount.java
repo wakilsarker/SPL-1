@@ -1,6 +1,6 @@
 package hospital.auth;
 
-/** Immutable account information returned after a successful login. */
+
 public final class UserAccount {
     private final String username;
     private final String role;
